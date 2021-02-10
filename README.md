@@ -19,3 +19,10 @@ app.listen(8000, () => {
 
 Install Nodemon
 yarn global add nodemon
+
+Run react frontend app and server
+
+path.../client$ yarn start
+
+path.../rest-api-company-book/client$ yarn start
+path.../rest-api-company-book$ start (alias) or nodemon server.js
