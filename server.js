@@ -21,7 +21,6 @@ app.use('/api', testimonialsRoutes); // add testimonialsRoutes routes to server
 app.use('/api', concertsRoutes); // add concertsRoutes routes to server
 app.use('/api', seatsRoutes);
 
-
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/client/build')));
 
