@@ -8,7 +8,8 @@
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "express": "*"
   },
   "scripts": {
     "start": "node server.js",
