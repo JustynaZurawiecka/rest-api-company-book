@@ -1,51 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./../db');
-const { v1: uuidv1 } = require('uuid');
 
-router.route('/seats').get((req, res) => {
-    res.json(db.seats);
-});
+const SeatController = require('../controllers/seat.controller');
 
-router.route('/seats/:id').get((req, res) => {
-    let id = db.seats.find(entry => entry.id == req.params.id);
-    res.json(id);
-});
-
-router.route('/seats').post((req, res) => {
-    let newEntry = {
-        id: uuidv1(),
-        day: req.body.day,
-        seat: req.body.seat,
-        client: req.body.client,
-        email: req.body.email,
-    }
-
-    if (db.seats.find(entry => entry.day == req.body.day && entry.seat == req.body.seat)) {
-        res.status(500).json({ message: 'The seat is already taken' });
-    }
-    db.seats.push(newEntry);
-    res.json({ message: 'OK' });
-});
-
-router.route('/seats/:id').delete((req, res) => {
-    db.seats.splice(db.seats.findIndex(id => id == req.params.id), 1);
-    res.json({ message: 'OK' });
-});
-
-router.route('/seats/:id').put((req, res) => {
-    const selectedEntry = db.seats.find(entry => entry.id == req.params.id);
-    const selectedIndex = db.seats.indexOf(selectedEntry);
-
-    db.seats[selectedIndex] = {
-        ...selectedEntry,
-        day: req.body.day,
-        seat: req.body.seat,
-        client: req.body.client,
-        email: req.body.email,
-    }
-
-    res.json({ message: 'OK' });
-});
+router.get('/seats', SeatController.getAll);
+router.get('/seats/:id', SeatController.getOne);
+router.post('/seats', SeatController.insertOne);
+router.put('/seats/:id', SeatController.updateOne);
+router.delete('/seats/:id', SeatController.deleteOne);
 
 module.exports = router;

@@ -30,3 +30,9 @@ path.../client$ yarn start
 
 path.../rest-api-company-book/client$ yarn start
 path.../rest-api-company-book$ start (alias) or nodemon server.js
+
+Import json data to mongo 
+
+```
+mongoimport --db NewWaveDB --collection testimonials --drop  --file testimonials.json --jsonArray
+```

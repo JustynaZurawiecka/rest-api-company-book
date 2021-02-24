@@ -1,18 +1,16 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('./db');
+// const db = require('./db');
 const path = require('path');
-
-const app = express();
-
-app.listen(process.env.PORT || 8000, () => {
-  console.log('Server is running on port: 8000');
-});
+const mongoose = require('mongoose');
 
 // import routes
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
+
+
+const app = express();
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -33,3 +31,15 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
 })
 
+// connects our backend code with the database
+mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log('Connected to the database');
+});
+db.on('error', err => console.log('Error ' + err));
+
+app.listen(process.env.PORT || 8000, () => {
+  console.log('Server is running on port: 8000');
+});
