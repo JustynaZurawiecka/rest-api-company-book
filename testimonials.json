@@ -1,21 +1,17 @@
 [
     {
-        "id": 1,
         "author": "John Doe",
         "text": "This company is worth every coin!"
     },
     {
-        "id": 2,
         "author": "Amanda Doe",
         "text": "They really know how to make you happy."
     },
     {
-        "id": 3,
         "author": "Alex Doe",
         "text": "They want to achieve a lot."
     },
     {
-        "id": 4,
         "author": "Katrin Doe",
         "text": "They want to be effective"
     }
