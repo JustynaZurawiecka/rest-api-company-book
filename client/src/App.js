@@ -8,6 +8,7 @@ import Home from './components/pages/Home/HomePage';
 import NotFound from './components/pages/NotFound/NotFoundPage';
 import Prices from './components/pages/Prices/PricesPage';
 import Order from './components/pages/Order/OrderPage.js';
+import ConcertPage from './components/pages/ConcertPage/ConcertPageContainer';
 
 class App extends React.Component {
 
@@ -18,6 +19,8 @@ class App extends React.Component {
           <Route path="/" exact component={Home} />
           <Route path="/prices" exact component={Prices} />
           <Route path="/order-a-ticket" exact component={Order} />
+          <Route path="/concert/:id" exact component={ConcertPage} />
+
           <Route component={NotFound} />
         </Switch>
       </MainLayout>

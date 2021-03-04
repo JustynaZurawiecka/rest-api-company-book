@@ -5,6 +5,8 @@ import { API_URL } from '../config';
 export const getConcerts = ({ concerts }) => concerts.data;
 export const getRequest = ({ concerts }) => concerts.request;
 
+export const getConcert = ({ concerts }) => concerts.singleConcert;
+
 /* ACTIONS */
 
 // action name creator
@@ -16,12 +18,14 @@ const END_REQUEST = createActionName('END_REQUEST');
 const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 
 const LOAD_CONCERTS = createActionName('LOAD_CONCERTS');
+const LOAD_CONCERT = createActionName('LOAD_CONCERT');
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 
 export const loadConcerts = payload => ({ payload, type: LOAD_CONCERTS });
+export const loadConcert = payload => ({ payload, type: LOAD_CONCERT });
 
 /* THUNKS */
 
@@ -42,6 +46,23 @@ export const loadConcertsRequest = () => {
   };
 };
 
+export const loadConcertRequest = id => {
+  return async dispatch => {
+
+    dispatch(startRequest());
+    try {
+
+      let res = await axios.get(`${API_URL}/concerts/${id}`);
+      dispatch(loadConcert(res.data));
+      dispatch(endRequest());
+
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+
+  };
+};
+
 /* INITIAL STATE */
 
 const initialState = {
@@ -51,12 +72,15 @@ const initialState = {
     error: null,
     success: null,
   },
+  singleConcert: null
 };
 
 /* REDUCER */
 
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
+    case LOAD_CONCERT:
+      return { ...statePart, singleConcert: action.payload };
     case LOAD_CONCERTS:
       return { ...statePart, data: [...action.payload] };
     case START_REQUEST:
