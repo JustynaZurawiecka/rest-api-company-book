@@ -20,12 +20,16 @@ const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 const LOAD_CONCERTS = createActionName('LOAD_CONCERTS');
 const LOAD_CONCERT = createActionName('LOAD_CONCERT');
 
+const SELECT_CONCERT = createActionName('SELECT_CONCERT');
+
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 
 export const loadConcerts = payload => ({ payload, type: LOAD_CONCERTS });
 export const loadConcert = payload => ({ payload, type: LOAD_CONCERT });
+
+export const selectConcert = payload => ({ payload, type: SELECT_CONCERT });
 
 /* THUNKS */
 

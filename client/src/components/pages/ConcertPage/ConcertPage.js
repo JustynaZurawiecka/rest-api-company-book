@@ -1,5 +1,8 @@
 import React from 'react';
-import { Row, Col, Container, Alert, Progress } from 'reactstrap';
+import { Row, Col, Container, Alert, Progress, Button } from 'reactstrap';
+import { Link } from 'react-router-dom'
+
+import './ConcertPage.scss';
 
 class ConcertPage extends React.Component {
 
@@ -11,6 +14,7 @@ class ConcertPage extends React.Component {
     render() {
 
         const { request, concert } = this.props;
+        console.log(concert, 'concert')
 
         if (request.pending) return <Progress animated color="primary" value={50} />;
         else if (request.error) return <Alert color="warning">{request.error}</Alert>;
@@ -25,13 +29,16 @@ class ConcertPage extends React.Component {
                     </Col>
                     <Col xs="6">
                         <div className="concert__info">
-                            <h2 className="concert__info__title">{concert.title}</h2>
-                            <p className="concert__info__price">Cena: {concert.price}</p>
+                            <h2 className="concert__info__title">{concert.performer}</h2>
+                            <p className="concert__info__price">Cena: {concert.price} PLN</p>
                         </div>
+                        <Link to="/buy-a-ticket">
+                            <Button className="concert__info-button" outline color="primary">Kup bilet</Button>
+                        </Link>
                     </Col>
                 </Row>
                 <h1>Opis koncertu</h1>
-                <p>Dodanie opisu do kolekcji concerts</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
             </Container>
         )
     };
