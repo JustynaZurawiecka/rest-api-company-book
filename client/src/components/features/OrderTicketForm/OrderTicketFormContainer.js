@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import { addSeatRequest, getRequests, loadSeatsRequest } from '../../../redux/seatsRedux';
+import { getTicketInfo } from '../../../redux/concertsRedux';
 import OrderTicketForm from './OrderTicketForm';
 
 const mapStateToProps = state => ({
   requests: getRequests(state),
+  ticketInfo: getTicketInfo(state),
 });
 
 const mapDispatchToProps = dispatch => ({

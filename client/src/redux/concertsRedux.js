@@ -7,6 +7,8 @@ export const getRequest = ({ concerts }) => concerts.request;
 
 export const getConcert = ({ concerts }) => concerts.singleConcert;
 
+export const getTicketInfo = ({ concerts }) => concerts.ticketInfo;
+
 /* ACTIONS */
 
 // action name creator
@@ -21,6 +23,7 @@ const LOAD_CONCERTS = createActionName('LOAD_CONCERTS');
 const LOAD_CONCERT = createActionName('LOAD_CONCERT');
 
 const SELECT_CONCERT = createActionName('SELECT_CONCERT');
+const UPDATE_TICKET = createActionName('UPDATE_TICKET');
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
@@ -30,6 +33,7 @@ export const loadConcerts = payload => ({ payload, type: LOAD_CONCERTS });
 export const loadConcert = payload => ({ payload, type: LOAD_CONCERT });
 
 export const selectConcert = payload => ({ payload, type: SELECT_CONCERT });
+export const updateTicket = payload => ({ payload, type: UPDATE_TICKET });
 
 /* THUNKS */
 
@@ -76,13 +80,18 @@ const initialState = {
     error: null,
     success: null,
   },
-  singleConcert: null
+  singleConcert: null,
+  ticketInfo: null
 };
 
 /* REDUCER */
 
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
+    case UPDATE_TICKET:
+      return { ...statePart, ticketInfo: action.payload }
+    case UPDATE_TICKET:
+      return { ...statePart, ticketInfo: null }
     case LOAD_CONCERT:
       return { ...statePart, singleConcert: action.payload };
     case LOAD_CONCERTS:

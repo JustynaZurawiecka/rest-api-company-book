@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadConcert: (id) => dispatch(loadConcertRequest(id))
+    loadConcert: (id) => dispatch(loadConcertRequest(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConcertPage);

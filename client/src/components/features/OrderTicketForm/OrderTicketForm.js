@@ -12,6 +12,8 @@ class OrderTicketForm extends React.Component {
       email: '',
       day: 1,
       seat: '',
+      count: 1,
+      sum: 1,
     },
     isError: false,
   }
@@ -38,12 +40,13 @@ class OrderTicketForm extends React.Component {
   }
 
   submitForm = async (e) => {
+
     const { order } = this.state;
     const { addSeat, loadSeats } = this.props;
-
+    console.log(order, "order");
     e.preventDefault();
 
-    if (order.client && order.email && order.day && order.seat) {
+    if (order.client && order.email && order.day && order.seat && order.count && order.sum) {
       await addSeat(order);
       this.setState({
         order: {
@@ -51,6 +54,9 @@ class OrderTicketForm extends React.Component {
           email: '',
           day: 1,
           seat: '',
+          performer: '',
+          count: 0,
+          sum: 0,
         },
         isError: false,
       });
@@ -63,7 +69,7 @@ class OrderTicketForm extends React.Component {
   render() {
 
     const { updateSeat, updateTextField, updateNumberField, submitForm } = this;
-    const { requests } = this.props;
+    const { requests, ticketInfo } = this.props;
     const { order, isError } = this.state;
 
     return (
@@ -89,7 +95,9 @@ class OrderTicketForm extends React.Component {
                 <option>2</option>
                 <option>3</option>
               </Input>
-              <small id="dayHelp" className="form-text text-muted">Every day of the festival uses individual ticket. You can book only one ticket at the time.</small>
+              {/* <small id="dayHelp" className="form-text text-muted">Every day of the festival uses individual ticket. You can book only one ticket at the time.</small> */}
+              <p>Number of tickets: {ticketInfo ? ticketInfo.count : 1}</p>
+              <p>Total: {ticketInfo ? ticketInfo.sum : 0} PLN</p>
             </FormGroup>
             <FormGroup check>
               <Label check>

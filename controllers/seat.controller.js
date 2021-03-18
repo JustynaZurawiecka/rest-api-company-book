@@ -22,8 +22,8 @@ exports.getOne = async (req, res) => {
 
 exports.insertOne = async (req, res) => {
     try {
-        const { day, seat, client, email } = req.body;
-        const newSeat = new Seat({ day: day, seat: seat, client: client, email: email });
+        const { day, seat, client, email, performer, count, sum } = req.body;
+        const newSeat = new Seat({ day: day, seat: seat, client: client, email: email, performer: performer, count: count, sum: sum });
         await newSeat.save();
         res.json({ message: 'OK' });
     }
@@ -34,10 +34,10 @@ exports.insertOne = async (req, res) => {
 
 exports.updateOne = async (req, res) => {
     try {
-        const { performer, genre, price, day, image } = req.body;
+        const { day, seat, client, email, performer, count, sum } = req.body;
         //below we check if element with the id from request exists and if yes server returns it and if not returns 404 Not found
         if (seat) {
-            await Seat.updateOne({ _id: req.params.id }, { $set: { day: day, seat: seat, client: client, email: email } });
+            await Seat.updateOne({ _id: req.params.id }, { $set: { day: day, seat: seat, client: client, email: email, performer: performer, count: count, sum: sum } });
             res.json({ message: 'OK' });
             res.json(seat);
         }
